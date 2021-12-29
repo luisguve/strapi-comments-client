@@ -23,8 +23,10 @@ const CommentForm = (props: CommentFormProps) => {
       return
     }
     setSending(true)
-    await postComment(content)
-    setContent("")
+    const successful = await postComment(content)
+    if (successful) {
+      setContent("")
+    }
     setSending(false)
   }
   if (!user) {

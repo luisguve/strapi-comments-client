@@ -114,8 +114,10 @@ const FormReply = ({ commentID, closeForm }: FormReplyProps) => {
       return
     }
     setSending(true)
-    await postReply(commentID, content)
-    closeForm()
+    const successful = await postReply(commentID, content)
+    if (successful) {
+      closeForm()
+    }
   }
   return (
     <form onSubmit={handleSubmit}>

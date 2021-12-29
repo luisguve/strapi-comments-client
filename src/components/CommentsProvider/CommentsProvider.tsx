@@ -42,10 +42,10 @@ interface ICoreContext {
   setContentID: (contentID: string) => void,
   loadMore: () => Promise<void>,
   apiURL: string,
-  postReply: (cID: string, content: string) => Promise<void>,
+  postReply: (cID: string, content: string) => Promise<boolean>,
   user: IUser | null,
   setUser: (user: IUser) => void,
-  postComment: (content: string) => Promise<void>
+  postComment: (content: string) => Promise<boolean>
 }
 export interface IConfigContext {
   setUser: (user: IUser) => void,
@@ -61,10 +61,10 @@ const defaultContext: ICoreContext = {
   setContentID: (contentID: string) => {},
   loadMore: async () => { return new Promise<void>(resolve => resolve()) },
   apiURL: "",
-  postReply: async (cID: string, content: string) => { return new Promise<void>(resolve => resolve()) },
+  postReply: async (cID: string, content: string) => { return new Promise<boolean>(resolve => resolve(true)) },
   user: null,
   setUser: (user: IUser) => {},
-  postComment: (content: string) => { return new Promise<void>(resolve => resolve()) }
+  postComment: (content: string) => { return new Promise<boolean>(resolve => resolve(true)) }
 }
 
 const defaultConfig: IConfigContext = {
@@ -180,7 +180,7 @@ export const CommentsProvider: FC<ProviderProps> = (props: ProviderProps) => {
   // Post reply and add to comment's list of subcomments
   const postReply = async (commentID: string, content: string) => {
     if (!user || !user.token) {
-      return
+      return false
     }
     const url = `${props.apiURL}/api/comment-manager/subcomments/${commentID}`
     try {
@@ -199,14 +199,16 @@ export const CommentsProvider: FC<ProviderProps> = (props: ProviderProps) => {
       // Add reply.
       addSubcomment(commentID, content, data.id)
       setErrorHelperMessage(null)
+      return true
     } catch(err) {
       console.log(err)
       setErrorHelperMessage("Something went wrong")
+      return false
     }
   }
   const postComment = async (content: string) => {
     if (!user || !user.token) {
-      return
+      return false
     }
     try {
       if (!contentID) {
@@ -229,9 +231,11 @@ export const CommentsProvider: FC<ProviderProps> = (props: ProviderProps) => {
       // Add comment.
       addComment(content, data.id)
       setErrorHelperMessage(null)
+      return true
     } catch(err) {
       console.log(err)
       setErrorHelperMessage("Something went wrong")
+      return false
     }
   }
   return (
