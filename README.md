@@ -95,7 +95,7 @@ After setting the content ID through `setContentID`, `CommentsProvider` will sta
 
 Here's how the interface looks like so far:
 
-![Comment sample](comment.PNG)
+![Comment sample](https://raw.githubusercontent.com/luisguve/strapi-comments-client/main/comment.PNG)
 
 Notice that there's also a button to Leave a reply, which posts subcomments associated with the parent comment.
 
@@ -109,8 +109,8 @@ You can place this component wherever you want, for example in between the `Comm
 
 If you're wondering how the error box looks like, here you have a sample:
 
-![Comment error](error.PNG)
+![Comment error](https://raw.githubusercontent.com/luisguve/strapi-comments-client/main/error.PNG)
 
 ## Full example
 
-If you'd like to check a full implementation of this library in a `React` project, you can check [this repo](https://github.com/luisguve/strapi-comments-client-example)
+For a full implementation of this library in a `React` project, check out [this repo](https://github.com/luisguve/strapi-comments-client-example)
