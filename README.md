@@ -1,6 +1,6 @@
 # Strapi Comments Client
 
-Display comments from the [Strapi Comment Manager plugin](https://npmjs.com/package/strapi-plugin-comment-manager) easily, with components from the [Strapi Design System](https://design-system-alpha.vercel.app) introduced in [Strapi V4](strapi.io/blog/announcing-strapi-v4).
+Display comments from the [Strapi Comment Manager plugin](https://npmjs.com/package/strapi-plugin-comment-manager) easily, with components from the [Strapi Design System](https://design-system-alpha.vercel.app) introduced in [Strapi V4](https://strapi.io/blog/announcing-strapi-v4).
 
 This component library fully supports Typescript.
 
