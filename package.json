@@ -1,6 +1,6 @@
 {
   "name": "strapi-comments-client",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React components for Strapi Comment Manager plugin",
   "scripts": {
     "rollup": "rollup -c"
