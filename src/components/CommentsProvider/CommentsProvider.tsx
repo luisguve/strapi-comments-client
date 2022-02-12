@@ -5,17 +5,17 @@ import { lightTheme } from "@strapi/design-system/themes"
 export interface IAuthor {
   username: string,
   email: string,
-  id: string
+  id: number
 }
 export interface ISubcomment {
-  id: string,
+  id: number,
   from_admin: boolean,
   createdAt: string,
   content: string,
   author: IAuthor | null,
 }
 export interface IComment {
-  id: string,
+  id: number,
   from_admin: boolean,
   createdAt: string,
   content: string,
@@ -27,7 +27,7 @@ export interface ICommentsData {
   comments: IComment[]
 }
 export interface IUser {
-  id: string,
+  id: number,
   token: string,
   username: string,
   email: string
@@ -42,13 +42,13 @@ interface ICoreContext {
   setContentID: (contentID: string) => void,
   loadMore: () => Promise<void>,
   apiURL: string,
-  postReply: (cID: string, content: string) => Promise<boolean>,
+  postReply: (cID: number, content: string) => Promise<boolean>,
   user: IUser | null,
-  setUser: (user: IUser) => void,
+  setUser: (user: IUser | null) => void,
   postComment: (content: string) => Promise<boolean>
 }
 export interface IConfigContext {
-  setUser: (user: IUser) => void,
+  setUser: (user: IUser | null) => void,
   setContentID: (contentID: string) => void
 }
 
@@ -61,14 +61,14 @@ const defaultContext: ICoreContext = {
   setContentID: (contentID: string) => {},
   loadMore: async () => { return new Promise<void>(resolve => resolve()) },
   apiURL: "",
-  postReply: async (cID: string, content: string) => { return new Promise<boolean>(resolve => resolve(true)) },
+  postReply: async (cID: number, content: string) => { return new Promise<boolean>(resolve => resolve(true)) },
   user: null,
-  setUser: (user: IUser) => {},
+  setUser: (user: IUser | null) => {},
   postComment: (content: string) => { return new Promise<boolean>(resolve => resolve(true)) }
 }
 
 const defaultConfig: IConfigContext = {
-  setUser: (user: IUser) => {},
+  setUser: (user: IUser | null) => {},
   setContentID: (contentID: string) => {}
 }
 
@@ -141,7 +141,7 @@ export const CommentsProvider: FC<ProviderProps> = (props: ProviderProps) => {
       setErrorHelperMessage("Something went wrong")
     }
   }
-  const addSubcomment = (commentID: string, content: string, replyID: string) => {
+  const addSubcomment = (commentID: number, content: string, replyID: number) => {
     const newReply: ISubcomment = {
       id: replyID,
       from_admin: false,
@@ -164,7 +164,7 @@ export const CommentsProvider: FC<ProviderProps> = (props: ProviderProps) => {
       comments: updatedComments
     })
   }
-  const addComment = (content: string, commentID: string) => {
+  const addComment = (content: string, commentID: number) => {
     const newComment: IComment = {
       id: commentID,
       content,
@@ -178,7 +178,7 @@ export const CommentsProvider: FC<ProviderProps> = (props: ProviderProps) => {
     })
   }
   // Post reply and add to comment's list of subcomments
-  const postReply = async (commentID: string, content: string) => {
+  const postReply = async (commentID: number, content: string) => {
     if (!user || !user.token) {
       return false
     }

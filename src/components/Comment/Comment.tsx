@@ -97,7 +97,7 @@ const Comment = ({ data, subcommentsLength }: CommentProps) => {
 export default Comment
 
 interface FormReplyProps {
-  commentID: string,
+  commentID: number,
   closeForm: () => void
 }
 
