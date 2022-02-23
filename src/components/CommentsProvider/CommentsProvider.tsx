@@ -110,6 +110,9 @@ export const CommentsProvider: FC<ProviderProps> = (props: ProviderProps) => {
       try {
         const res = await fetch(url)
         const data = await res.json()
+        if (!res.ok) {
+          throw data
+        }
         setCommentsData(data)
         setErrorHelperMessage(null)
       } catch(err) {
@@ -129,6 +132,9 @@ export const CommentsProvider: FC<ProviderProps> = (props: ProviderProps) => {
     try {
       const res = await fetch(url)
       const data = await res.json()
+      if (!res.ok) {
+        throw data
+      }
       setCommentsData({
         ...commentsData,
         comments: commentsData.comments.concat(data.comments)
