@@ -1,8 +1,4 @@
 import React from "react"
-import { Box } from "@strapi/design-system/Box"
-import { Divider } from "@strapi/design-system/Divider"
-import { Stack } from "@strapi/design-system/Stack"
-import { Typography } from "@strapi/design-system/Typography"
 
 import { ISubcomment } from "../CommentsProvider"
 import { ISOToFull } from "../../lib"
@@ -15,22 +11,22 @@ const Reply = ({data}: ReplyProps) => {
   const authorLabel = data.from_admin ? "Admin" : data.author ? data.author.username : "User"
 
   return (
-    <Box paddingTop={3}>
-      <Divider />
-      <Box paddingTop={3}>
-        <Stack horizontal size={2}>
-          <Typography fontWeight="bold">
+    <div>
+      <hr />
+      <div>
+        <div className="d-flex">
+          <p className="fw-bold mb-1">
             {authorLabel}
-          </Typography>
-          <Typography>
+          </p>
+          <p className="ms-2 mb-1">
             {"\t"} on {ISOToFull(data.createdAt)}
-          </Typography>
-        </Stack>
-      </Box>
-      <Box>
-        <Typography>{data.content}</Typography>
-      </Box>
-    </Box>
+          </p>
+        </div>
+      </div>
+      <div>
+        <p className="mb-1">{data.content}</p>
+      </div>
+    </div>
   )
 }
 

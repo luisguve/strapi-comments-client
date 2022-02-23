@@ -1,8 +1,4 @@
 import React, { useContext, useState, useEffect } from "react"
-import { Stack } from "@strapi/design-system/Stack"
-import { Box } from "@strapi/design-system/Box"
-import { Typography } from "@strapi/design-system/Typography"
-import { Button } from "@strapi/design-system/Button"
 
 import Comment from "../Comment"
 import CommentsContext from "../CommentsProvider"
@@ -25,28 +21,28 @@ const Comments = () => {
     setLoadingMore(false)
   }
   return (
-    <Box>
+    <div>
       {
         loadingComments ?
-          <Typography variant="beta">
+          <p className="small fs-6">
             Loading Comments...
-          </Typography>
+          </p>
         :
           (comments.length > 0) ?
-            <Stack size={2}>
+            <div className="d-flex flex-column">
               {commentsJSX}
               {
                 (commentsJSX && (commentsJSX.length < commentsCount)) &&
-                <Button
-                  variant="secondary"
+                <button
+                  className="btn btn-secondary mt-2"
                   onClick={loadMoreComments}
-                  loading={loadingMore ? true : false}
-                >Load more comments</Button>
+                  disabled={loadingMore ? true : undefined}
+                >Load more comments</button>
               }
-            </Stack>
-          : <Typography variant="beta">There are no comments</Typography>
+            </div>
+          : <p className="small fs-6">There are no comments</p>
       }
-    </Box>
+    </div>
   )
 }
 

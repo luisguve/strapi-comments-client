@@ -1,6 +1,4 @@
 import React, { useState, useEffect, createContext, useContext, FC } from "react"
-import { ThemeProvider } from "@strapi/design-system/ThemeProvider"
-import { lightTheme } from "@strapi/design-system/themes"
 
 export interface IAuthor {
   username: string,
@@ -239,27 +237,25 @@ export const CommentsProvider: FC<ProviderProps> = (props: ProviderProps) => {
     }
   }
   return (
-    <ThemeProvider theme={lightTheme}>
-      <CoreContext.Provider value={
-        {
-          ...commentsData,
-          collapseReplies: props.collapseReplies || true,
-          apiURL: props.apiURL,
-          setContentID,
-          loadingComments,
-          errorHelperMessage,
-          loadMore,
-          postComment,
-          postReply,
-          user,
-          setUser
-        }
-      }>
-        <ConfigProvider>
-          {props.children}
-        </ConfigProvider>
-      </CoreContext.Provider>
-    </ThemeProvider>
+    <CoreContext.Provider value={
+      {
+        ...commentsData,
+        collapseReplies: props.collapseReplies || true,
+        apiURL: props.apiURL,
+        setContentID,
+        loadingComments,
+        errorHelperMessage,
+        loadMore,
+        postComment,
+        postReply,
+        user,
+        setUser
+      }
+    }>
+      <ConfigProvider>
+        {props.children}
+      </ConfigProvider>
+    </CoreContext.Provider>
   )
 }
 

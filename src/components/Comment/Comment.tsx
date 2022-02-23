@@ -1,10 +1,4 @@
 import React, { useState, useEffect, useContext } from "react"
-import { Stack } from '@strapi/design-system/Stack';
-import { Divider } from '@strapi/design-system/Divider';
-import { Textarea } from '@strapi/design-system/Textarea';
-import { Button } from '@strapi/design-system/Button';
-import { Box } from "@strapi/design-system/Box"
-import { Typography } from '@strapi/design-system/Typography';
 
 import CommentsContext from "../CommentsProvider"
 import { ISOToFull } from "../../lib"
@@ -15,6 +9,7 @@ export interface CommentProps {
   data: IComment,
   subcommentsLength: Number,
 }
+
 
 const Comment = ({ data, subcommentsLength }: CommentProps) => {
   const { collapseReplies, user } = useContext(CommentsContext)
@@ -43,40 +38,44 @@ const Comment = ({ data, subcommentsLength }: CommentProps) => {
     setShowFormReply(prev => !prev)
   }
   return (
-    <Box paddingTop={4} paddingBottom={4}>
-      <Box paddingBottom={4}>
-        <Box paddingBottom={2}>
-          <Stack horizontal size={2}>
-            <Typography fontWeight="bold">
+    <div className="py-2">
+      <div className="pb-1">
+        <div className="pb-1">
+          <div className="d-flex">
+            <p className="fw-bold mb-1">
               {data.from_admin ? "Admin" : data.author ? data.author.username : "User"}
-            </Typography>
-            <Typography>
+            </p>
+            <p className="ms-2 mb-1">
               {"\t"} on {ISOToFull(data.createdAt)}
-            </Typography>
-          </Stack>
-        </Box>
-        <Box background="neutral0" borderColor="neutral200" hasRadius={true} padding={6}>
-          <Typography>
+            </p>
+          </div>
+        </div>
+        <div className="p-3 border rounded">
+          <p className="mb-0">
             {data.content}
-          </Typography>
-        </Box>
-      </Box>
-      <Stack horizontal size={4}>
+          </p>
+        </div>
+      </div>
+      <div className="d-flex">
       {
         (replies && replies.length) ?
-          <Box>
-            <Button variant="ghost" onClick={toggleReplies}>
+          <div>
+            <button className="btn btn-light" onClick={toggleReplies}>
               {replies.length}
               {" "} {replies.length === 1 ? " reply" : " replies"}
-            </Button>
-          </Box>
-        : <Box>0 replies</Box>
+            </button>
+          </div>
+        : <div className="d-flex align-items-center">0 replies</div>
       }
       {
-        (user && user.token) &&
-        <Button variant="secondary" onClick={toggleShowFormReply}>Leave a reply</Button>
+        (user && user.token) && (
+          <button
+            className="btn btn-outline-primary ms-2"
+            onClick={toggleShowFormReply}
+          >Leave a reply</button>
+        )
       }
-      </Stack>
+      </div>
       {
         showFormReply &&
           <FormReply
@@ -86,11 +85,11 @@ const Comment = ({ data, subcommentsLength }: CommentProps) => {
       }
       {
         showReplies &&
-        <Box paddingLeft={3}>
+        <div className="ps-3">
           {replies}
-        </Box>
+        </div>
       }
-    </Box>
+    </div>
   )
 }
 
@@ -105,7 +104,7 @@ const FormReply = ({ commentID, closeForm }: FormReplyProps) => {
   const { postReply } = useContext(CommentsContext)
   const [content, setContent] = useState("")
   const [sending, setSending] = useState(false)
-  const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
     setContent(e.currentTarget.value)
   }
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -120,30 +119,35 @@ const FormReply = ({ commentID, closeForm }: FormReplyProps) => {
     }
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <Textarea
-        placeholder="Type a comment here"
-        label="Your reply"
-        name="content"
-        onChange={handleInput}
-      >
-        {content}
-      </Textarea>
-      <Box paddingTop={2}>
-        <Stack horizontal size={4}>
-          <Button
+    <form onSubmit={handleSubmit} className="ps-3 mt-1">
+      <div className="d-flex flex-column mb-1">
+        <label>
+          <p className="fw-bold small mb-1">Your reply</p>
+          <textarea
+            className="form-control"
+            rows={3}
+            onChange={handleInput}
+            placeholder="Type a comment here"
+            name="content"
+            value={content}
+          ></textarea>
+        </label>
+      </div>
+      <div className="pt-1">
+        <div className="d-flex">
+          <button
+            className="btn btn-primary"
             type="submit"
-            loading={sending ? true : undefined}
-            disabled={content.length < 1 ? true : undefined}
-          >{sending ? "Sending" : "Submit"}</Button>
-          <Button
-            variant="secondary"
-            type="Button"
+            disabled={((content.length < 1) || sending) ? true : undefined}
+          >{sending ? "Sending" : "Submit"}</button>
+          <button
+            className="btn btn-secondary ms-2"
+            type="button"
             disabled={sending ? true : undefined}
             onClick={closeForm}
-          >Cancel</Button>
-        </Stack>
-      </Box>
+          >Cancel</button>
+        </div>
+      </div>
     </form>
   )
 }

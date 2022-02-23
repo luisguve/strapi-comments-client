@@ -1,8 +1,4 @@
 import React, { useState, useContext } from "react"
-import { Textarea } from '@strapi/design-system/Textarea';
-import { Button } from '@strapi/design-system/Button';
-import { Box } from "@strapi/design-system/Box"
-import { Typography } from '@strapi/design-system/Typography';
 
 import CommentsContext from "../CommentsProvider"
 
@@ -14,7 +10,7 @@ const CommentForm = (props: CommentFormProps) => {
   const { user, postComment } = useContext(CommentsContext)
   const [content, setContent] = useState("")
   const [sending, setSending] = useState(false)
-  const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
     setContent(e.currentTarget.value)
   }
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,31 +27,36 @@ const CommentForm = (props: CommentFormProps) => {
   }
   if (!user) {
     return (
-      <Box paddingTop={3} paddingBottom={3}>
+      <div className="py-3">
         Login to post a comment
-      </Box>
+      </div>
     )
   }
   return (
     <form onSubmit={handleSubmit}>
-      <Box paddingTop={3} paddingBottom={3}>
-        <Typography variant="beta">{props.label || "Post a comment"}</Typography>
-        <Textarea
-          placeholder="Type a comment here"
-          label="Content"
-          name="content"
-          onChange={handleInput}
-        >
-          {content}
-        </Textarea>
-        <Box paddingTop={2}>
-          <Button
+      <div className="py-3">
+        <p className="fs-4">{props.label || "Post a comment"}</p>
+        <div className="d-flex flex-column mb-1">
+          <label>
+            <p className="fw-bold small mb-1">Your reply</p>
+            <textarea
+              className="form-control"
+              rows={3}
+              onChange={handleInput}
+              placeholder="Type a comment here"
+              name="content"
+              value={content}
+            ></textarea>
+          </label>
+        </div>
+        <div className="pt-1">
+          <button
+            className="btn btn-primary"
             type="submit"
-            loading={sending ? true : undefined}
-            disabled={content.length < 1 ? true : false}
-          >{sending ? "Sending" : "Submit"}</Button>
-        </Box>
-      </Box>
+            disabled={((content.length < 1) || sending) ? true : undefined}
+          >{sending ? "Sending" : "Submit"}</button>
+        </div>
+      </div>
     </form>
   )
 }

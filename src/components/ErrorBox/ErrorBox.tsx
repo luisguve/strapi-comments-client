@@ -1,6 +1,4 @@
 import React, { useContext } from "react"
-import { Status } from "@strapi/design-system/Status"
-import { Box } from "@strapi/design-system/Box"
 
 import CommentsContext from "../CommentsProvider"
 
@@ -10,9 +8,9 @@ const ErrorBox = () => {
     return null
   }
   return (
-    <Box paddingTop={3} paddingBottom={3}>
-      <Status variant="danger">{errorHelperMessage}</Status>
-    </Box>
+    <div className="py-3">
+      <div className="alert alert-danger">{errorHelperMessage}</div>
+    </div>
   )
 }
 
