@@ -8,7 +8,7 @@ const ErrorBox = () => {
     return null
   }
   return (
-    <div className="py-3">
+    <div className="py-2">
       <div className="alert alert-danger">{errorHelperMessage}</div>
     </div>
   )
