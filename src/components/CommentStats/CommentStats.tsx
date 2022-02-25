@@ -40,7 +40,7 @@ const CommentStats = (props: CommentStatsProps) => {
       {
         (stats.count === null) ?
           "loading comments"
-        : stats.count + (stats.count > 1 ? " comments" : " comment")
+        : stats.count + " comment"+(stats.count !== 1 ? "s" : "")
       }
     </p>
   )
