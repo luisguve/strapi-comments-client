@@ -38,7 +38,7 @@ const CommentForm = (props: CommentFormProps) => {
         <p className="fs-4">{props.label || "Post a comment"}</p>
         <div className="d-flex flex-column mb-1">
           <label>
-            <p className="fw-bold small mb-1">Your reply</p>
+            <p className="fw-bold small mb-1">Your comment</p>
             <textarea
               className="form-control"
               rows={3}
