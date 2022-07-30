@@ -1,14 +1,14 @@
 # Strapi Comments Client
 
-Display comments from the [Strapi Comment Manager plugin](https://npmjs.com/package/strapi-plugin-comment-manager) easily, with components built from [Bootstrap](https://getbootstrap.com).
+Display comments from the [Strapi Comment Manager plugin](https://npmjs.com/package/@coolstrapiplugins/strapi-plugin-comment-manager) easily, with components built from [Bootstrap](https://getbootstrap.com).
 
 This component library fully supports Typescript.
 
 ## Installation
 
-This library requires **react ^17.0.2** and **react-dom ^17.0.2**.
+This library requires **react ^17.0.2** and **react-dom ^17.0.2**, **bootstrap ^5.1.3** and **@popperjs/core^2.11.2**.
 
-    npm install strapi-comments-client --save
+    npm install @coolstrapiplugins/strapi-comments-client --save
 
 ## Usage
 
@@ -25,9 +25,9 @@ For example, this could be your index.js or main.js file:
       CommentsProvider,
       Comments,
       CommentForm
-    } from "strapi-comments-client"
+    } from "@coolstrapiplugins/strapi-comments-client"
      
-    const STRAPI = "http://localhost:1337" // The address of your strapi backend instance
+    const STRAPI = "http://localhost:1337" // The address of your strapi backend
      
     ReactDOM.render(
       <React.StrictMode>
@@ -44,11 +44,11 @@ Then you can place the `Comments` component anywhere in your app to load and ren
 
 Here's how the interface looks like:
 
-![Comment sample](https://raw.githubusercontent.com/luisguve/strapi-comments-client/main/comment.PNG)
+![Comment sample](https://raw.githubusercontent.com/coolstrapiplugins/strapi-comments-client/main/comment.PNG)
 
 Updating the parameters for fetching and posting comments is done through a `React.Context`:
 
-    import { CommentsConfigContext } from "strapi-comments-client"
+    import { CommentsConfigContext } from "@coolstrapiplugins/strapi-comments-client"
 
 `CommentsConfigContext` returns two functions: `setUser` and `setContentID`
 
@@ -65,12 +65,12 @@ Updating the parameters for fetching and posting comments is done through a `Rea
 
 There's one more component that this library exports: `ErrorBox`
 
-    import { ErrorBox } from "strapi-comments-client"
+    import { ErrorBox } from "@coolstrapiplugins/strapi-comments-client"
 
 All it does is display error messages when fetching or posting comments fail.
 
-![Comment error](https://raw.githubusercontent.com/luisguve/strapi-comments-client/main/error.PNG)
+![Comment error](https://raw.githubusercontent.com/coolstrapiplugins/strapi-comments-client/main/error.PNG)
 
 ## Full example
 
-For a full implementation of this library in a `React` project, check out [this repo](https://github.com/luisguve/strapi-comments-client-example)
+For a full implementation of this library in a `React` project, check out [this repo](https://github.com/coolstrapiplugins/strapi-comments-client-example)
