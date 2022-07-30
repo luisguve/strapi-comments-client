@@ -1,5 +1,5 @@
 {
-  "name": "strapi-comments-client",
+  "name": "@coolstrapiplugins/strapi-comments-client",
   "version": "2.0.3",
   "description": "React components for Strapi Comment Manager plugin",
   "scripts": {
