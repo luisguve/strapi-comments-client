@@ -1,6 +1,6 @@
 {
   "name": "@coolstrapiplugins/strapi-comments-client",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "React components for Strapi Comment Manager plugin",
   "scripts": {
     "rollup": "rollup -c"
@@ -43,5 +43,5 @@
   "dependencies": {
     "date-fns": "^2.28.0"
   },
-  "repository": "https://github.com/luisguve/strapi-comment-client"
+  "repository": "https://github.com/coolstrapiplugins/strapi-comment-client"
 }
